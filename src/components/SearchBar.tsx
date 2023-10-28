@@ -5,17 +5,14 @@ import _ from "lodash";
 export interface City {
   id: string;
   name: string;
-  coord: {
-    lat: number;
-    lon: number;
-  };
+
   main: {
     temp: number;
     feels_like: number;
     pressure: number;
     humidity: number;
   };
-  dt: number;
+
   wind: {
     speed: number;
     deg: number;
@@ -106,6 +103,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ setCity }) => {
       options={options}
       isSearchable={true}
       placeholder="Search for a city"
+      styles={{
+        container: (provided) => ({
+          ...provided,
+          width: 200,
+        }),
+      }}
     />
   );
 };

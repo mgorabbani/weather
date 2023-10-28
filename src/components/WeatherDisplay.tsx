@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { City } from "./SearchBar";
 import { kelvinToUnits } from "../lib/utils";
+import FavCities from "./FavCities/FavCities";
 
+import "./weather.css";
 interface WeatherDisplayProps {
-  city: City;
+  city?: City;
+  setCity: React.Dispatch<React.SetStateAction<City | undefined>>;
 }
 
-const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city }) => {
+const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city, setCity }) => {
   const [units, setUnits] = useState<"metric" | "imperial">("metric");
 
   const toggleUnits = () => {
@@ -18,24 +21,89 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city }) => {
   };
 
   if (!city) return null;
+
   return (
-    <div>
-      <img
-        src={`https://source.unsplash.com/1600x900/?${city.name}`}
-        alt="city"
-      />
-      <h2>
-        Weather for: {city.name}, {city.sys.country}
-      </h2>
-      <button onClick={toggleUnits}>Toggle Units</button>
-      {units === "metric" ? <p>°C</p> : <p>°F</p>}
-      <div>
-        <h3>Current Weather</h3>
-        <p>Temperature: {kelvinToUnits(city.main.temp, units)}</p>
-        <p>Feels Like: {kelvinToUnits(city.main.feels_like, units)}</p>
-        <p>Humidity: {city.main.humidity}%</p>
-        <p>Wind: {city.wind.speed} mph</p>
-        <p>Rain Precipitation: {city.rain ? city.rain["1h"] : 0} mm</p>
+    <div className="container">
+      <div style={{ width: "100%" }}>
+        <div
+          style={{
+            padding: 20,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            backgroundImage: `url(https://source.unsplash.com/880x300/?${
+              city.name + "&" + city.sys.country
+            })`,
+            backgroundSize: "cover",
+            height: "300px",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <h1 style={{ margin: 0, color: "white" }}>
+              {city.name}, {city.sys.country}
+            </h1>
+            <button onClick={toggleUnits}>
+              {units === "metric" ? <p>°C</p> : <p>°F</p>}
+            </button>
+          </div>
+          <FavCities
+            city={{
+              id: city.id,
+              name: city.name,
+            }}
+            setCity={setCity}
+          />
+        </div>
+
+        <div className="weather-container">
+          <div className="weather-column">
+            <h3>Current Weather</h3>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <div className="weather-details">
+                <h3>{city.weather[0].description}</h3>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <h2 style={{ fontSize: "3rem" }}>
+                  {kelvinToUnits(city.main.temp, units)}
+                </h2>
+                <p>Real Feel: {kelvinToUnits(city.main.feels_like, units)}</p>
+              </div>
+            </div>
+          </div>
+          <div className="weather-column">
+            <table className="weather-table">
+              <tbody>
+                <tr>
+                  <td>Humidity</td>
+                  <td>{city.main.humidity}%</td>
+                </tr>
+                <tr>
+                  <td>Wind</td>
+                  <td>{city.wind.speed} mph</td>
+                </tr>
+                <tr>
+                  <td>Rain Precipitation</td>
+                  <td>{city.rain ? city.rain["1h"] : 0} mm</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );

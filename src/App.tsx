@@ -1,40 +1,23 @@
 import React, { useState } from "react";
-import SearchBar from "./components/SearchBar";
 import WeatherDisplay from "./components/WeatherDisplay";
+import Header from "./components/Header/Header";
+import { City } from "./components/SearchBar";
 
 const App: React.FC = () => {
-  const [city, setCity] = useState<any>();
-  const [favoriteCities, setFavoriteCities] = useState<any[]>([]);
+  const [city, setCity] = useState<City | undefined>();
 
-  const addFavoriteCity = (city: any) => {
-    setFavoriteCities([...favoriteCities, city]);
-  };
-  const removeFavoriteCity = (city: any) => {
-    const newFavoriteCities = favoriteCities.filter(
-      (favoriteCity) => favoriteCity.id !== city.id
-    );
-    setFavoriteCities(newFavoriteCities);
-  };
   return (
-    <div className="app-container">
-      <h1>Weather Application</h1>
-      <h2>Favorite Cities</h2>
-      <div>
-        {favoriteCities.map((favoriteCity, index) => (
-          <div key={index}>
-            <h3 onClick={() => setCity(favoriteCity)}>{favoriteCity.name}</h3>
-            <button onClick={() => removeFavoriteCity(favoriteCity)}>
-              Remove
-            </button>
+    <section>
+      <Header setCity={setCity} />
+      <WeatherDisplay city={city} setCity={setCity} />
+      {!city && (
+        <div className="container">
+          <div style={{ marginTop: "2rem" }}>
+            <h3>Search for a city to get started!</h3>
           </div>
-        ))}
-        <button onClick={() => addFavoriteCity(city)} disabled={!city}>
-          Add
-        </button>
-      </div>
-      <SearchBar setCity={setCity} />
-      <WeatherDisplay city={city} />
-    </div>
+        </div>
+      )}
+    </section>
   );
 };
 

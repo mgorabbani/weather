@@ -1,0 +1,39 @@
+.container-favcities {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+.addButton {
+  width: 120px;
+}
+
+.cityList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.cityItem {
+  display: flex;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.removeButton {
+  display: flex;
+  align-items: center;
+  font-size: 0.7rem;
+  padding: 0 8px;
+  color: #fff;
+  background-color: rgba(255, 0, 0, 0.6);
+  justify-content: space-between;
+}

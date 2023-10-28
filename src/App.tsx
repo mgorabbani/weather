@@ -1,35 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import SearchBar from "./components/SearchBar";
+import WeatherDisplay from "./components/WeatherDisplay";
 
-function App() {
-  const [count, setCount] = useState(0)
+// api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=d956fa0dc4a306ea064eba4cb1a68c35
+const App: React.FC = () => {
+  const [city, setCity] = useState<string>("");
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app-container">
+      <h1>Weather Application</h1>
+      <SearchBar setCity={setCity} />
+      <WeatherDisplay city={city} />
+    </div>
+  );
+};
 
-export default App
+export default App;

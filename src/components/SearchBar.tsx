@@ -40,7 +40,7 @@ interface OptionType {
   label: string;
 }
 
-const API_KEY = "d956fa0dc4a306ea064eba4cb1a68c35";
+const API_KEY = import.meta.env.REACT_APP_OPENWEATHERMAP_API_KEY;
 const BASE_URL = "http://api.openweathermap.org/data/2.5/find";
 
 const SearchBar: React.FC<SearchBarProps> = ({ setCity }) => {

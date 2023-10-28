@@ -1,26 +1,27 @@
 import React, { useState } from "react";
 
 import "./favcities.css";
-interface City {
+import { City } from "../SearchBar";
+interface FavCity {
   id: string;
   name: string;
 }
 
 interface FavCitiesProps {
   setCity: React.Dispatch<React.SetStateAction<City | undefined>>;
-  city?: City;
+  city?: FavCity;
 }
 
 const FavCities: React.FC<FavCitiesProps> = ({ setCity, city }) => {
-  const [favoriteCities, setFavoriteCities] = useState<Set<City>>(new Set());
+  const [favoriteCities, setFavoriteCities] = useState<Set<FavCity>>(new Set());
 
-  const addFavoriteCity = (city: City) => {
+  const addFavoriteCity = (city: FavCity) => {
     if (!favoriteCities.has(city)) {
       setFavoriteCities(new Set([...favoriteCities, city]));
     }
   };
 
-  const removeFavoriteCity = (city: City) => {
+  const removeFavoriteCity = (city: FavCity) => {
     favoriteCities.delete(city);
     setFavoriteCities(new Set([...favoriteCities]));
   };
@@ -35,7 +36,7 @@ const FavCities: React.FC<FavCitiesProps> = ({ setCity, city }) => {
       <div className="cityList">
         {[...favoriteCities].map((favoriteCity) => (
           <div key={favoriteCity.id} className="cityItem">
-            <span onClick={() => setCity(favoriteCity)}>
+            <span onClick={() => setCity(favoriteCity as City)}>
               {favoriteCity.name}
             </span>
             <button

@@ -20,6 +20,10 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city }) => {
   if (!city) return null;
   return (
     <div>
+      <img
+        src={`https://source.unsplash.com/1600x900/?${city.name}`}
+        alt="city"
+      />
       <h2>
         Weather for: {city.name}, {city.sys.country}
       </h2>

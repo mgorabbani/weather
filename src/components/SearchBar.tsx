@@ -29,6 +29,9 @@ export interface City {
     description: string;
     icon: string;
   }[];
+  rain?: {
+    "1h": number;
+  };
 }
 
 interface SearchBarProps {
@@ -54,7 +57,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setCity }) => {
 
       try {
         const response = await fetch(
-          `${BASE_URL}?q=${input}&type=like&mode=json&appid=${API_KEY}`
+          `${BASE_URL}?q=${input}&type=like&mode=json&appid=${API_KEY}&units=metric&exclude=hourly,current,minutely,alerts`
         );
         const data = await response.json();
         if (response.ok && data && data.list) {

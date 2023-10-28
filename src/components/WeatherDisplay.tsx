@@ -18,6 +18,7 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city }) => {
         <p>Feels Like: {city.main.feels_like}°C</p>
         <p>Humidity: {city.main.humidity}%</p>
         <p>Wind: {city.wind.speed} mph</p>
+        <p>Rain Precipitation: {city.rain ? city.rain["1h"] : 0} mm</p>
       </div>
     </div>
   );

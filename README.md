@@ -31,7 +31,7 @@ This is a React application that allows users to search for cities and view weat
    - Create a `.env` file in the root directory.
    - Add the OpenWeatherMap API key:
      ```env
-     REACT_APP_OPENWEATHERMAP_API_KEY=your_api_key_here
+     VITE_OPENWEATHERMAP_API_KEY=your_api_key_here
      ```
 
 4. **Start the development server**:

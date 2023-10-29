@@ -54,13 +54,7 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ city, setCity }) => {
               {units === "metric" ? <p>°C</p> : <p>°F</p>}
             </button>
           </div>
-          <FavCities
-            city={{
-              id: city.id,
-              name: city.name,
-            }}
-            setCity={setCity}
-          />
+          <FavCities city={city} setCity={setCity} />
         </div>
 
         <div className="weather-container">

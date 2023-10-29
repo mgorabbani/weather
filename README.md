@@ -18,6 +18,8 @@ This is a React application that allows users to search for cities and view weat
    cd [repository-directory]
    ```
 
+   add .env.local which values are given in the email.
+
 2. **Install the dependencies**:
 
    ```bash
@@ -41,12 +43,11 @@ This is a React application that allows users to search for cities and view weat
 
 - Run `pnpm run dev` to start the development server.
 - Run `pnpm run build` to build the application for production.
-- Run `pnpm run lint` to lint the codebase with ESLint.
+- Run `pnpm run test` to run the test.
 
-## Contributing
+## Improvements
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
+- Add a loading indicator.
+- Add more tests.
+- I would use react-testing-library to test some of the components.
+  but i would use e2e testing to test the whole application. my favorite tool for e2e testing is cypress and playwright.

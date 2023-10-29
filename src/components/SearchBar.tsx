@@ -40,7 +40,7 @@ interface OptionType {
   label: string;
 }
 
-const API_KEY = import.meta.env.REACT_APP_OPENWEATHERMAP_API_KEY;
+const API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY;
 const BASE_URL = "http://api.openweathermap.org/data/2.5/find";
 
 const SearchBar: React.FC<SearchBarProps> = ({ setCity }) => {
@@ -95,6 +95,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ setCity }) => {
 
   return (
     <Select
+      className="react-select-container"
+      classNamePrefix="react-select"
       value={options.find((option) => option.value === inputValue)}
       onInputChange={handleInputChange}
       onChange={(selectedOption: OptionType | null) =>
@@ -104,6 +106,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ setCity }) => {
       isSearchable={true}
       placeholder="Search for a city"
       styles={{
+        menu: (provided) => ({
+          ...provided,
+          color: "#000",
+        }),
         container: (provided) => ({
           ...provided,
           width: 200,
